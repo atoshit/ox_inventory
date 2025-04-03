@@ -18,13 +18,15 @@ local function Upgrade()
 	if trunk and glovebox then
 		local vehicles = {}
 
-		for _, v in pairs(trunk) do
+        for i = 1, #trunk do
+            local v = trunk[i]
 			vehicles[v.owner] = vehicles[v.owner] or {}
 			local subbedName = v.name:sub(7, #v.name)
 			vehicles[v.owner][subbedName] = vehicles[v.owner][subbedName] or {trunk=v.data or '[]', glovebox='[]'}
 		end
 
-		for _, v in pairs(glovebox) do
+		for i = 1, #glovebox do
+            local v = glovebox[i]
 			vehicles[v.owner] = vehicles[v.owner] or {}
 			local subbedName = v.name:sub(10, #v.name)
 			vehicles[v.owner][subbedName] = {trunk=vehicles[v.owner][subbedName].trunk ~= '[]' and vehicles[v.owner][subbedName].trunk or '[]', glovebox=vehicles[v.owner][subbedName].glovebox ~= '[]' and vehicles[v.owner][subbedName].glovebox or v.data or '[]'}
